@@ -1,0 +1,15 @@
+[Unit]
+Description=ctunnel for wg0 connection
+After=network.target
+
+[Service]
+User=[TODO_SET_USER_HERE]
+WorkingDirectory=/tmp
+EnvironmentFile=/opt/wgcap/wgcap_service.conf
+ExecStart=/usr/local/bin/ctunnel -U -s -l ${SERVER_IP}:5006 -f 127.0.0.1:51871 -C aes-256-cfb
+Type=forking
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

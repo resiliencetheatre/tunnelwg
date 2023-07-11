@@ -1,0 +1,16 @@
+[Unit]
+Description=ctunnel for wireguard
+After=network.target
+Conflicts=rtptun.service udp2raw.service 
+
+[Service]
+User=[TODO_SET_USER_HERE]
+WorkingDirectory=/tmp
+EnvironmentFile=/opt/wgcap/wgcap_service.conf
+ExecStart=/usr/local/bin/ctunnel -U -c -k /opt/wgcap/.passkey -l 127.0.0.1:3333 -f ${SERVER_IP}:5006 -C aes-256-cfb 
+Type=forking
+Restart=always
+RestartSec=5
+
+# [Install]
+# WantedBy=multi-user.target

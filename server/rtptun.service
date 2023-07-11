@@ -1,0 +1,15 @@
+[Unit]
+Description=rtptun for wg0 connection
+After=network.target
+
+[Service]
+User=[TODO_SET_USER_HERE]
+WorkingDirectory=/tmp
+EnvironmentFile=/opt/wgcap/wgcap_service.conf
+ExecStart=rtptun server -k ${RTPTUN_KEY} -l 5004 -p 51871
+Type=simple
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

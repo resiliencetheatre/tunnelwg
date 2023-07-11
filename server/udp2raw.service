@@ -1,0 +1,13 @@
+[Unit]
+Description=udp2raw for wg0
+After=network.target
+
+[Service]
+WorkingDirectory=/tmp
+ExecStart=udp2raw -s -l${SERVER_IP}:5005 -r 127.0.0.1:51871 -k ${UDP2RAW_PSK} --raw-mode faketcp -a
+Type=simple
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
